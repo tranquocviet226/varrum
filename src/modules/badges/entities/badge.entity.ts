@@ -5,7 +5,7 @@ import {
 import { UserStatus } from '../../../interfaces/enums/user-status.enum'
 
 @Entity({ name: 'badges' })
-export class UserEntity extends BaseEntity {
+export class BadgeEntity extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
@@ -25,7 +25,7 @@ export class UserEntity extends BaseEntity {
     })
     status: string
 
-    constructor(user?: Partial<UserEntity>) {
+    constructor(user?: Partial<BadgeEntity>) {
         super()
         Object.assign(this, user)
     }

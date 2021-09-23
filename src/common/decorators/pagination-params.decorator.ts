@@ -11,7 +11,7 @@ export const PaginationParams = createParamDecorator(
       defaultPage: 0,
       defaultLimit: 10,
       defaultOrder: {},
-      defaultOrderDirection: 'ASC',
+      defaultOrderDirection: 'DESC',
       maxAllowedSize: 20
     },
     ctx: ExecutionContext

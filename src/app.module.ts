@@ -13,6 +13,7 @@ import { SearchModule } from './modules/search/search.module'
 import { SeedModule } from './modules/seeds/seed.module'
 import { UserModule } from './modules/users/user.module'
 import { BadgesModule } from './modules/badges/badges.module';
+import { CategoryModule } from '@modules/categories/category.module'
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { BadgesModule } from './modules/badges/badges.module';
     NotificationModule,
     SearchModule,
     BadgesModule,
+    CategoryModule
   ],
   providers: [Unique]
 })

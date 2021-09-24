@@ -119,6 +119,14 @@ export const RolesPermissions = {
         {
             slug: EPermissions.ADMIN_ACCESS_LESSONS_DELETE,
             description: 'Delete chapter'
+        },
+        {
+            slug: EPermissions.ADMIN_ACCESS_CREATE_CATEGORY,
+            description: 'Create category'
+        },
+        {
+            slug: EPermissions.ADMIN_ACCESS_DELETE_CATEGORY,
+            description: 'Delete category'
         }
     ],
     User: [

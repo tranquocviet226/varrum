@@ -1,6 +1,6 @@
 import { BaseEntity } from '@database/entities'
-import { UserEntity } from '@modules/users/entities/user.entity'
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { CategoryEntity } from '@modules/categories/entities/category.entity'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity({ name: 'photos' })
 export class PhotoEntity extends BaseEntity {
@@ -21,6 +21,9 @@ export class PhotoEntity extends BaseEntity {
     default: true
   })
   active: boolean
+
+  @OneToMany(() => CategoryEntity, category => category.photo)
+  categories: CategoryEntity[]
 
   constructor(photos?: Partial<PhotoEntity>) {
     super()

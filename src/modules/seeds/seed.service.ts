@@ -11,7 +11,7 @@ import { UserStatus } from '../../interfaces/enums/user-status.enum'
 import { PermissionEntity } from '../permissions/permission.entity'
 import { RoleEntity } from '../roles/role.entity'
 import { UserEntity } from '../users/entities/user.entity'
-import { RolesPermissions } from './roles-permission.sseed'
+import { RolesPermissions } from './roles-permission.seed'
 
 const users = [
   {

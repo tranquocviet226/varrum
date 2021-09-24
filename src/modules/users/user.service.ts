@@ -5,7 +5,6 @@ import { PaginationRequest } from '@common/interfaces'
 import { TokenService } from '@modules/auths'
 import { PhotoRepository } from '@modules/photos/photo.repository'
 import { Injectable } from '@nestjs/common'
-import { TimeoutError } from 'rxjs'
 import { HashHelper, Pagination } from 'src/helpers'
 import { QueryRequest } from 'src/helpers/query.request'
 import { ErrorType } from 'src/interfaces/enums'
@@ -57,11 +56,6 @@ export class UserService {
     }
   }
 
-  /**
-   * Create new user
-   * @param userDto {CreateUserRequestDto}
-   * @returns {Promise<UserResponseDto>}
-   */
   public async createUser(
     userDto: CreateUserRequestDto
   ): Promise<UserResponseDto> {
@@ -85,7 +79,6 @@ export class UserService {
       this.mailService.sendMailConfirmation(userEntity, token.verifyToken)
       return UserMapper.toDto(userEntity)
     } catch (_error) {
-      console.log(_error)
       throw new CommonException(
         ErrorType.INTERNAL_SERVER,
         ErrorMessage.INTERNAL_SERVER
@@ -94,7 +87,6 @@ export class UserService {
   }
 
   public getUsers(user: UserEntity): Promise<UserResponseDto> {
-    // const photoEntity = await this.photoRepository.findOne({parent: user})
     try {
       return UserMapper.toDto(user)
     } catch (_error) {

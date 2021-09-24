@@ -1,3 +1,7 @@
+import { ApiGlobalResponse, PaginationParams } from '@common/decorators'
+import { PaginationResponseDto } from '@common/dtos'
+import { MessageResponse } from '@common/interceptors/message.response'
+import { PaginationRequest } from '@common/interfaces'
 import {
   CurrentUser,
   JwtAuthGuard,
@@ -5,18 +9,13 @@ import {
   PermissionsGuard,
   TOKEN_NAME
 } from '@modules/auths'
-import { ApiGlobalResponse, PaginationParams } from '@common/decorators'
-import { PaginationResponseDto } from '@common/dtos'
-import { MessageResponse } from '@common/interceptors/message.response'
-import { PaginationRequest } from '@common/interfaces'
 import {
   Body,
   Controller,
   Get,
   Param,
-  Post,
-  Put,
-  UseGuards,
+  Patch,
+  Post, UseGuards,
   ValidationPipe
 } from '@nestjs/common'
 import {
@@ -43,7 +42,7 @@ import { UserService } from './user.service'
 @ApiBearerAuth(TOKEN_NAME)
 @Controller('users')
 export class UserController {
-  constructor(private readonly usersService: UserService) {}
+  constructor(private readonly usersService: UserService) { }
 
   @ApiOperation({ description: 'Get list user' })
   @ApiGlobalResponse(UserResponseDto)
@@ -95,7 +94,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ description: 'Update user' })
   @ApiGlobalResponse(UserResponseDto)
-  @Put()
+  @Patch()
   public updateUser(
     @CurrentUser() currentUser: UserEntity,
     @Body(ValidationPipe) newUser: UpdateUserRequestDto
@@ -107,7 +106,7 @@ export class UserController {
   @Permissions(EPermissions.ADMIN_ACCESS_USERS_UPDATE_ID)
   @ApiParam({ name: 'id', example: 1, required: true })
   @ApiOperation({ description: 'Update user by id' })
-  @Put(':id')
+  @Patch(':id')
   public updateUserById(
     @Param() id: number,
     @Body(ValidationPipe) newUser: UpdateUserIdRequestDto

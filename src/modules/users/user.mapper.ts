@@ -1,8 +1,6 @@
 import { PhotoEntity } from '@modules/photos/entities/photo.entity'
-import { PhotoRepository } from '@modules/photos/photo.repository'
 import { RoleMapper } from 'src/modules/roles/role.mapper'
 import { UserStatus } from '../../interfaces/enums/user-status.enum'
-import { PermissionMapper } from '../permissions/permission.mapper'
 import { RoleEntity } from '../roles/role.entity'
 import { CreateUserRequestDto, UserResponseDto } from './dtos'
 import { UpdateUserIdRequestDto } from './dtos/update-user-id.request.dto'

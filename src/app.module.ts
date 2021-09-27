@@ -12,8 +12,9 @@ import { RolesModule } from './modules/roles/role.module'
 import { SearchModule } from './modules/search/search.module'
 import { SeedModule } from './modules/seeds/seed.module'
 import { UserModule } from './modules/users/user.module'
-import { BadgesModule } from './modules/badges/badges.module';
+import { BadgesModule } from './modules/badges/badges.module'
 import { CategoryModule } from '@modules/categories/category.module'
+import { PostModule } from '@modules/posts/post.module'
 
 @Module({
   imports: [
@@ -35,8 +36,9 @@ import { CategoryModule } from '@modules/categories/category.module'
     NotificationModule,
     SearchModule,
     BadgesModule,
-    CategoryModule
+    CategoryModule,
+    PostModule
   ],
   providers: [Unique]
 })
-export class AppModule { }
+export class AppModule {}

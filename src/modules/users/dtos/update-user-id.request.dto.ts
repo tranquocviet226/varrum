@@ -5,7 +5,8 @@ import {
   IsNotEmpty,
   Length,
   Matches,
-  MaxLength, ValidateIf
+  MaxLength,
+  ValidateIf
 } from 'class-validator'
 import { regex } from 'src/helpers/regex.helper'
 import { ErrorMessage } from 'src/interfaces/enums/error-message.enum'

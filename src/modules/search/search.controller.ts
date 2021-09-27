@@ -7,7 +7,7 @@ import { SearchService } from './search.service'
 @ApiBearerAuth(TOKEN_NAME)
 @Controller('search')
 export class SearchController {
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService) {}
 
   @Get()
   @ApiQuery({
@@ -25,6 +25,6 @@ export class SearchController {
   })
   @ApiQuery({ name: 'search', required: false })
   public search() {
-
+    return this.searchService.search()
   }
 }

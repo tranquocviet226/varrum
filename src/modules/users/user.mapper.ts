@@ -8,11 +8,10 @@ import { UpdateUserRequestDto } from './dtos/update-user.request.dto'
 import { UserEntity } from './entities/user.entity'
 
 export class UserMapper {
-
   public static async toDto(entity: UserEntity): Promise<UserResponseDto> {
     const dto = new UserResponseDto()
     dto.id = entity.id
-    dto.avatar = (await Promise.resolve(entity.avatar))
+    dto.avatar = await Promise.resolve(entity.avatar)
     dto.fullname = entity.fullname
     dto.email = entity.email
     dto.roles = await Promise.all((await entity.roles).map(RoleMapper.toDto))
@@ -28,7 +27,7 @@ export class UserMapper {
     dto.id = entity.id
     dto.fullname = entity.fullname
     dto.email = entity.email
-    dto.avatar = (await entity.avatar)
+    dto.avatar = await entity.avatar
     dto.permissions = await Promise.resolve(entity.permissions)
     dto.roles = await Promise.all(
       (await entity.roles).map(RoleMapper.toDtoWithRelations)
@@ -44,7 +43,8 @@ export class UserMapper {
   ): UserEntity {
     const entity = new UserEntity()
     entity.fullname = dto.fullname
-    entity.avatar = dto.avatar_id && Promise.resolve(new PhotoEntity({ id: dto.avatar_id }))
+    entity.avatar =
+      dto.avatar_id && Promise.resolve(new PhotoEntity({ id: dto.avatar_id }))
     entity.email = dto.email || null
     entity.password = dto.password
     entity.roles = Promise.resolve(

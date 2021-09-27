@@ -33,4 +33,4 @@ import { TokenService } from './services/token.service'
   providers: [AuthService, JwtStrategy, TokenService, MailService],
   exports: [JwtStrategy, PassportModule, TokenService, AuthService]
 })
-export class AuthModule { }
+export class AuthModule {}

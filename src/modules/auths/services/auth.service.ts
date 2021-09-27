@@ -41,9 +41,7 @@ export class AuthService {
     email,
     password
   }: AuthCredentialsRequestDto): Promise<LoginResponseDto> {
-    const user: UserEntity = await this.usersRepository.findUserByEmail(
-      email
-    )
+    const user: UserEntity = await this.usersRepository.findUserByEmail(email)
 
     if (!user) {
       throw new CommonException(

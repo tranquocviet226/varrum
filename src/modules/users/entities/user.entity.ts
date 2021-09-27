@@ -1,7 +1,13 @@
 import { PhotoEntity } from '@modules/photos/entities/photo.entity'
 import { BaseEntity } from 'src/database/entities/base.entity'
 import {
-  Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn
 } from 'typeorm'
 import { UserStatus } from '../../../interfaces/enums/user-status.enum'
 import { PermissionEntity } from '../../permissions/permission.entity'
@@ -90,7 +96,7 @@ export class UserEntity extends BaseEntity {
     lazy: true,
     cascade: true
   })
-  @JoinColumn({name: 'avatar_id'})
+  @JoinColumn({ name: 'avatar_id' })
   avatar: Promise<PhotoEntity>
 
   constructor(user?: Partial<UserEntity>) {

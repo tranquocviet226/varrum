@@ -8,7 +8,7 @@ import { UsersRepository } from './repositories/user.repository'
 
 @Injectable()
 export class UserValidate {
-  constructor(private usersRepository: UsersRepository) { }
+  constructor(private usersRepository: UsersRepository) {}
 
   public static validateUser(userDto: CreateUserRequestDto) {
     if (!userDto.email) {

@@ -26,7 +26,10 @@ export class MailService {
     })
   }
 
-  async sendMailResetPasswordByCode(user: UserEntity, emailCode: number | string) {
+  async sendMailResetPasswordByCode(
+    user: UserEntity,
+    emailCode: number | string
+  ) {
     await this.mailerService.sendMail({
       to: user?.email,
       // from: '"Support Team" <support@example.com>', // override default from
@@ -46,7 +49,7 @@ export class MailService {
       subject: 'Password reset.   ',
       template: './mail-reset-password', // `.hbs` extension is appended automatically
       context: {
-        name: user.fullname,
+        name: user.fullname
       }
     })
   }

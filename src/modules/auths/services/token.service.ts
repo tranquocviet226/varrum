@@ -64,10 +64,7 @@ export class TokenService {
    * @returns  Returns access and refresh tokens with expiry or error
    */
   public generateRefreshToken(refreshToken: string): TokenDto {
-    const { id, email } = this.verifyToken(
-      refreshToken,
-      TokenType.RefreshToken
-    )
+    const { id, email } = this.verifyToken(refreshToken, TokenType.RefreshToken)
     return this.generateAuthToken({ id: id, email: email })
   }
 

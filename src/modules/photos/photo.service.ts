@@ -12,17 +12,17 @@ import { ErrorMessage } from 'src/interfaces/enums/error-message.enum'
 import { MessageSuccesses } from 'src/interfaces/message.success'
 import { DeletePhotoRequestDto } from './dtos/delete-photo.request.dto'
 import { PhotoEntity } from './entities/photo.entity'
-import { UploadMapper } from './photo.mapper'
+import { PhotoMapper } from './photo.mapper'
 import { PhotoRepository } from './photo.repository'
 
 @Injectable()
 export class UploadService {
-  constructor(private photoRepository: PhotoRepository) { }
+  constructor(private photoRepository: PhotoRepository) {}
 
   async uploadFile(file: Express.Multer.File): Promise<PhotoEntity> {
     try {
       const filename = file?.filename || ''
-      const photo = UploadMapper.toCreateEntity(filename)
+      const photo = PhotoMapper.toCreateEntity(filename)
       await this.photoRepository.save(photo)
 
       return photo
@@ -42,7 +42,9 @@ export class UploadService {
     })
   }
 
-  async list(pagination: PaginationRequest<QueryRequest>): Promise<PaginationResponseDto<PhotoEntity>> {
+  async list(
+    pagination: PaginationRequest<QueryRequest>
+  ): Promise<PaginationResponseDto<PhotoEntity>> {
     try {
       const [list, count] = await this.photoRepository.getPhotosAndCount(
         pagination

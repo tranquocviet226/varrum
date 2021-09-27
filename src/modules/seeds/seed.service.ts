@@ -25,7 +25,7 @@ const users = [
 
 @Injectable()
 export class SeedService {
-  constructor(private readonly connection: Connection) { }
+  constructor(private readonly connection: Connection) {}
 
   public async createSeed(): Promise<MessageResponse> {
     try {

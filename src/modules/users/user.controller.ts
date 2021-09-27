@@ -15,7 +15,8 @@ import {
   Get,
   Param,
   Patch,
-  Post, UseGuards,
+  Post,
+  UseGuards,
   ValidationPipe
 } from '@nestjs/common'
 import {
@@ -42,7 +43,7 @@ import { UserService } from './user.service'
 @ApiBearerAuth(TOKEN_NAME)
 @Controller('users')
 export class UserController {
-  constructor(private readonly usersService: UserService) { }
+  constructor(private readonly usersService: UserService) {}
 
   @ApiOperation({ description: 'Get list user' })
   @ApiGlobalResponse(UserResponseDto)
@@ -50,7 +51,11 @@ export class UserController {
   @Permissions(EPermissions.ADMIN_ACCESS_USERS_LIST)
   @ApiQuery({ name: 'limit', required: false })
   @ApiQuery({ name: 'page', required: false })
-  @ApiQuery({ name: 'orderBy', required: false, description: 'users.id' })
+  @ApiQuery({
+    name: 'orderBy',
+    required: false,
+    description: 'users.createdAt'
+  })
   @ApiQuery({
     name: 'orderDirection',
     required: false,

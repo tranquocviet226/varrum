@@ -22,7 +22,7 @@ export class PhotoEntity extends BaseEntity {
   })
   active: boolean
 
-  @OneToMany(() => CategoryEntity, category => category.photo)
+  @OneToMany(() => CategoryEntity, (category) => category.photo)
   categories: CategoryEntity[]
 
   constructor(photos?: Partial<PhotoEntity>) {

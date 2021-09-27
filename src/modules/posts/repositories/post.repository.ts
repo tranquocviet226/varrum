@@ -1,13 +1,13 @@
 import { PaginationRequest } from '@common/interfaces'
 import { QueryRequest } from 'src/helpers/query.request'
 import { EntityRepository, Repository } from 'typeorm'
-import { PhotoEntity } from './entities/photo.entity'
+import { PostEntity } from '../entities/post.entity'
 
-@EntityRepository(PhotoEntity)
-export class PhotoRepository extends Repository<PhotoEntity> {
-  public getPhotosAndCount(
+@EntityRepository(PostEntity)
+export class PostRepository extends Repository<PostEntity> {
+  public getDataAndCount(
     pagination: PaginationRequest<QueryRequest>
-  ): Promise<[photosEntities: PhotoEntity[], totalPhotos: number]> {
+  ): Promise<[userEntities: PostEntity[], totalUsers: number]> {
     const {
       skip,
       limit: take,
@@ -15,11 +15,15 @@ export class PhotoRepository extends Repository<PhotoEntity> {
       condition,
       query: { search }
     } = pagination
+    const query = this.createQueryBuilder('posts')
 
-    const query = this.createQueryBuilder('photos')
+    query.leftJoinAndSelect('posts.photo', 'photo')
+    query.leftJoinAndSelect('posts.categories', 'categories')
+
     if (condition) {
       query.where(condition)
     }
+
     query.skip(skip)
     query.take(take)
     query.orderBy(order)
@@ -27,8 +31,8 @@ export class PhotoRepository extends Repository<PhotoEntity> {
     if (search) {
       query.where(
         `
-                    photos.name LIKE :search
-                    `,
+        posts.title LIKE :search
+            `,
         { search: `%${search}%` }
       )
     }

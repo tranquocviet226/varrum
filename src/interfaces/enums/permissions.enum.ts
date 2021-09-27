@@ -41,5 +41,6 @@ export enum EPermissions {
   ADMIN_ACCESS_LESSONS_DELETE = 'admin.access.lesson.delete',
   // Category
   ADMIN_ACCESS_CREATE_CATEGORY = 'admin.access.create.category',
+  ADMIN_ACCESS_UPDATE_CATEGORY = 'admin.access.update.category',
   ADMIN_ACCESS_DELETE_CATEGORY = 'admin.access.delete.category'
 }

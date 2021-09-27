@@ -1,6 +1,6 @@
 export enum ErrorMessage {
   // Common
-  INTERNAL_SERVER = 'Internal server error',
+  INTERNAL_SERVER = 'Something went wrong',
   REQUEST_TIMEOUT = 'Request timeout',
   NOT_FOUND = 'Not found!',
   // Auth
@@ -40,7 +40,6 @@ export enum ErrorMessage {
   EMAIL_PHONE_NOT_EMPTY = 'Email or phone should not be empty',
   // Role
   ROLE_EXISTS = 'Role already exists!',
-  // Class
   VALID_NUMBER = 'Id must be a valid number',
   ID_NOT_EMPTY = 'Id should not be empty',
   ID_NOT_FOUND = 'Id not found!',
@@ -48,5 +47,8 @@ export enum ErrorMessage {
   CLASS_TYPE_NOT_EMPTY = 'Class type should not be empty',
   INVALID_CLASS_TYPE = `Class type must be 'basic' or 'advanced'`,
   // Photo
-  IMAGE_NOT_FOUND = 'Image not found'
+  IMAGE_NOT_FOUND = 'Image not found',
+
+  // Category
+  CATEGORY_NOT_FOUND = 'Category not found'
 }

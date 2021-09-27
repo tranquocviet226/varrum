@@ -16,7 +16,13 @@ import {
   UseInterceptors
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiQuery,
+  ApiTags
+} from '@nestjs/swagger'
 import { randomUUID } from 'crypto'
 import { diskStorage } from 'multer'
 import { extname } from 'path'
@@ -29,7 +35,7 @@ import { UploadService } from './photo.service'
 @ApiBearerAuth(TOKEN_NAME)
 @Controller('upload')
 export class UploadController {
-  constructor(private uploadService: UploadService) { }
+  constructor(private uploadService: UploadService) {}
 
   @UseGuards(JwtAuthGuard, PermissionsGuard)
   @Post()
@@ -81,7 +87,9 @@ export class UploadController {
   })
   @ApiQuery({ name: 'search', required: false })
   @Get('files')
-  list(@PaginationParams() pagination: PaginationRequest<QueryRequest>): Promise<PaginationResponseDto<PhotoEntity>> {
+  list(
+    @PaginationParams() pagination: PaginationRequest<QueryRequest>
+  ): Promise<PaginationResponseDto<PhotoEntity>> {
     return this.uploadService.list(pagination)
   }
 

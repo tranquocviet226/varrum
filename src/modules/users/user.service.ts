@@ -38,7 +38,7 @@ export class UserService {
     private mailService: MailService,
     private tokenService: TokenService,
     private userValidate: UserValidate
-  ) { }
+  ) {}
 
   public async listUser(
     pagination: PaginationRequest<QueryRequest>
@@ -62,9 +62,19 @@ export class UserService {
     UserValidate.validateUser(userDto)
 
     const UserRole = await this.rolesRepository.findOne({ name: ERoles.USER })
-    if (!UserRole) throw new CommonException(ErrorType.ROLE_DOES_NOT_EXISTS, ErrorMessage.ROLE_DOES_NOT_EXISTS)
-    const photoEntity = await this.photoRepository.findOne({ id: userDto.avatar_id })
-    if (userDto.avatar_id && !photoEntity) throw new CommonException(ErrorType.AVATAR_ID_NOT_FOUND, ErrorMessage.AVATAR_ID_NOT_FOUND)
+    if (!UserRole)
+      throw new CommonException(
+        ErrorType.ROLE_DOES_NOT_EXISTS,
+        ErrorMessage.ROLE_DOES_NOT_EXISTS
+      )
+    const photoEntity = await this.photoRepository.findOne({
+      id: userDto.avatar_id
+    })
+    if (userDto.avatar_id && !photoEntity)
+      throw new CommonException(
+        ErrorType.AVATAR_ID_NOT_FOUND,
+        ErrorMessage.AVATAR_ID_NOT_FOUND
+      )
 
     try {
       let userEntity = UserMapper.toCreateEntity(userDto, [UserRole.id])

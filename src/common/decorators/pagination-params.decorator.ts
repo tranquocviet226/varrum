@@ -20,7 +20,7 @@ export const PaginationParams = createParamDecorator(
       query: { skip, page, limit }
     } = ctx.switchToHttp().getRequest()
     const {
-      query: { orderBy, orderDirection, condition, ...query }
+      query: { orderBy, orderDirection, condition, random, ...query }
     } = ctx.switchToHttp().getRequest()
     const {
       defaultSkip,
@@ -58,7 +58,8 @@ export const PaginationParams = createParamDecorator(
       limit: limit,
       order: order,
       query: query,
-      condition: condition
+      condition: condition,
+      random: random
     }
   }
 )

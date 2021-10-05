@@ -1,43 +1,34 @@
 import { PaginationRequest } from '@common/interfaces'
 import { QueryRequest } from 'src/helpers/query.request'
 import { EntityRepository, Repository } from 'typeorm'
-import { PostEntity } from '../entities/post.entity'
+import { BannerEntity } from './entities/banner.entity'
 
-@EntityRepository(PostEntity)
-export class PostRepository extends Repository<PostEntity> {
-  public getDataAndCount(
+@EntityRepository(BannerEntity)
+export class BannerRepository extends Repository<BannerEntity> {
+  public getPhotosAndCount(
     pagination: PaginationRequest<QueryRequest>
-  ): Promise<[userEntities: PostEntity[], totalUsers: number]> {
+  ): Promise<[bannerEntities: BannerEntity[], totalPhotos: number]> {
     const {
       skip,
       limit: take,
       order,
       condition,
-      random,
       query: { search }
     } = pagination
-    const query = this.createQueryBuilder('posts')
 
-    query.leftJoinAndSelect('posts.photo', 'photo')
-    query.leftJoinAndSelect('posts.categories', 'categories')
-
+    const query = this.createQueryBuilder('banners')
     if (condition) {
       query.where(condition)
     }
-
     query.skip(skip)
     query.take(take)
-    if (random) {
-      query.orderBy('RAND()')
-    } else {
-      query.orderBy(order)
-    }
+    query.orderBy(order)
 
     if (search) {
       query.where(
         `
-        posts.title LIKE :search
-            `,
+        banners.name LIKE :search
+        `,
         { search: `%${search}%` }
       )
     }

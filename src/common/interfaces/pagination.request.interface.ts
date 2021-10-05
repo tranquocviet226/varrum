@@ -22,6 +22,8 @@ export interface PaginationRequest<T> {
 
   condition?: string
 
+  random?: boolean
+
   // Other params of type T
   query?: T
 }

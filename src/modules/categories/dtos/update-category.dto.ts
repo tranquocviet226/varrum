@@ -16,6 +16,11 @@ export class UpdateCategoryDto {
   name: string
 
   @ApiProperty({
+    example: 'oranged'
+  })
+  color: string
+
+  @ApiProperty({
     example: 'd3126ba5-bfcd-4c90-8941-eadf5dcb5e86'
   })
   photo_id: string

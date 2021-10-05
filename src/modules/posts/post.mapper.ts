@@ -19,6 +19,7 @@ export class PostMapper {
     entity.photo =
       dto.photo_id && Promise.resolve(new PhotoEntity({ id: dto.photo_id }))
     entity.content = dto.content
+    entity.description = dto.description
     entity.author = Promise.resolve(new UserEntity(currentUser))
     entity.categories = Promise.resolve(
       dto.categories_id.map((id) => new CategoryEntity({ id: id }))
@@ -36,6 +37,7 @@ export class PostMapper {
     entity.photo =
       dto.photo_id && Promise.resolve(new PhotoEntity({ id: dto.photo_id }))
     entity.content = dto.content
+    entity.description = dto.description
     entity.categories =
       dto.categories_id &&
       Promise.resolve(
@@ -52,6 +54,7 @@ export class PostMapper {
     dto.title = entity.title
     dto.photo = PhotoMapper.toDto(await entity.photo)
     dto.content = entity.content
+    dto.description = entity.description
     dto.views = entity.views
     dto.author = await UserMapper.toDto(await entity.author)
     dto.categories = await Promise.all(

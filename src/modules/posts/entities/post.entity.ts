@@ -26,9 +26,16 @@ export class PostEntity extends BaseEntity {
 
   @Column({
     name: 'content',
-    type: 'varchar'
+    type: 'longtext'
   })
   content: string
+
+  @Column({
+    name: 'description',
+    type: 'varchar',
+    nullable: true
+  })
+  description: string
 
   @Column({
     name: 'views',

@@ -36,6 +36,13 @@ export class UpdatePostDto {
   content?: string
 
   @ApiProperty({
+    example:
+      'Với việc VCS không có đại diện tham dự CKTG 2021, nhà vô địch khu vực PCS - PSG Talon quyết định mang huy hiệu của giải đấu LMHT Việt Nam đến với giải đấu.'
+  })
+  @IsOptional()
+  description?: string
+
+  @ApiProperty({
     example: `["fec9ba8d-f01d-46b6-8652-a621da375d0f", "fc51f754-061d-4988-ae52-44e6e520fe85"]`
   })
   @IsOptional()

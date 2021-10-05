@@ -46,6 +46,11 @@ export class PostController {
     required: false,
     description: 'categories.id = "d4afd93b-69dd-49d3-86fc-531372975957"'
   })
+  @ApiQuery({
+    name: 'random',
+    required: false,
+    description: 'false'
+  })
   @ApiQuery({ name: 'search', required: false })
   @Get()
   public listPosts(

@@ -30,6 +30,13 @@ export class CategoryEntity extends BaseEntity {
   })
   status: string
 
+  @Column({
+    name: 'color',
+    type: 'varchar',
+    nullable: true
+  })
+  color: string
+
   @ManyToOne(() => PhotoEntity, (photo) => photo.categories, {
     lazy: true,
     cascade: true

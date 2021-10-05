@@ -10,6 +10,7 @@ export class CategoryMapper {
     const dto = new CategoryResponseDto()
     dto.id = entity.id
     dto.name = entity.name
+    dto.color = entity.color
     dto.photo = await Promise.resolve(entity.photo)
     dto.status = entity.status
     return dto
@@ -18,6 +19,7 @@ export class CategoryMapper {
   public static toCreateEntity(dto: CreateCategoryDto): CategoryEntity {
     const entity = new CategoryEntity()
     entity.name = dto.name
+    entity.color = dto.color
     entity.photo = Promise.resolve(new PhotoEntity({ id: dto.photo_id }))
     entity.status = Status.ACTIVE
     return entity
@@ -28,6 +30,7 @@ export class CategoryMapper {
     dto: UpdateCategoryDto
   ): CategoryEntity {
     entity.name = dto.name
+    entity.color = dto.color
     entity.photo = Promise.resolve(new PhotoEntity({ id: dto.photo_id }))
     entity.status = dto.status
     return entity

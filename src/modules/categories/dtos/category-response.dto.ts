@@ -9,6 +9,9 @@ export class CategoryResponseDto {
   name: string
 
   @ApiProperty()
+  color: string
+
+  @ApiProperty()
   photo?: PhotoEntity
 
   @ApiProperty()

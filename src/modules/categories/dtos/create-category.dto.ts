@@ -12,4 +12,9 @@ export class CreateCategoryDto {
     example: 'd3126ba5-bfcd-4c90-8941-eadf5dcb5e86'
   })
   photo_id: string
+
+  @ApiProperty({
+    example: '#FF8000'
+  })
+  color: string
 }

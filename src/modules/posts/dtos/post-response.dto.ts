@@ -14,6 +14,9 @@ export class PostResponseDto {
   content: string
 
   @ApiProperty()
+  description: string
+
+  @ApiProperty()
   views: number
 
   @ApiProperty()

@@ -23,6 +23,7 @@ import {
   ValidateTokenRequestDto,
   ValidateTokenResponseDto
 } from './dtos'
+import { AuthFbDto } from './dtos/auth-fb.dto'
 import { RefreshVerifyAccountResponseDto } from './dtos/refresh-verify-account.response.dto'
 import { VerifyAccountRequestDto } from './dtos/verify-account.request.dto'
 import { VerifyAccountResponseDto } from './dtos/verify-account.response.dto'
@@ -85,5 +86,10 @@ export class AuthController {
     @Body() dto: EmailRequestDto
   ): Promise<RefreshVerifyAccountResponseDto> {
     return this.authService.refreshVerifyAccount(dto)
+  }
+
+  @Post('/fb-login')
+  loginFb(@Body(ValidationPipe) dto: AuthFbDto): Promise<LoginResponseDto> {
+    return this.authService.loginFb(dto)
   }
 }

@@ -1,3 +1,5 @@
+import { CommentEntity } from '@modules/comments/entities/comment.entity'
+import { LikeEntity } from '@modules/forums/like/entities/like.entity'
 import { PhotoEntity } from '@modules/photos/entities/photo.entity'
 import { BaseEntity } from 'src/database/entities/base.entity'
 import {
@@ -7,6 +9,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn
 } from 'typeorm'
 import { UserStatus } from '../../../interfaces/enums/user-status.enum'
@@ -17,6 +20,36 @@ import { RoleEntity } from '../../roles/role.entity'
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
+
+  @Column({
+    name: 'fb_id',
+    type: 'varchar',
+    length: 100,
+    unique: true,
+    nullable: true
+  })
+  fbId: string
+
+  @Column({
+    name: 'fb_token',
+    type: 'longtext',
+    nullable: true
+  })
+  fbToken: string
+
+  @Column({
+    name: 'fb_expiration_time',
+    type: 'varchar',
+    nullable: true
+  })
+  fbExpirationTime: number
+
+  @Column({
+    name: 'fb_avatar',
+    type: 'varchar',
+    nullable: true
+  })
+  fbAvatar: string
 
   @Column({
     name: 'fullname',
@@ -38,7 +71,7 @@ export class UserEntity extends BaseEntity {
   @Column({
     name: 'password',
     type: 'varchar',
-    nullable: false
+    nullable: true
   })
   password: string
 
@@ -98,6 +131,18 @@ export class UserEntity extends BaseEntity {
   })
   @JoinColumn({ name: 'avatar_id' })
   avatar: Promise<PhotoEntity>
+
+  @OneToMany(() => LikeEntity, (like) => like.id, {
+    lazy: true,
+    cascade: true
+  })
+  like: Promise<LikeEntity[]>
+
+  @OneToMany(() => CommentEntity, (comments) => comments.id, {
+    lazy: true,
+    cascade: true
+  })
+  comments: Promise<CommentEntity[]>
 
   constructor(user?: Partial<UserEntity>) {
     super()

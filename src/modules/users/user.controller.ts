@@ -30,6 +30,7 @@ import {
 import { QueryRequest } from 'src/helpers/query.request'
 import { EPermissions } from 'src/interfaces/enums/permissions.enum'
 import { UserResponseDto } from './dtos'
+import { CreateFbUserRequestDto } from './dtos/create-fb-user.request.dto'
 import { CreateUserRequestDto } from './dtos/create-user.request.dto'
 import { EmailRequestDto } from './dtos/refresh-verify.request.dto'
 import { ResetPasswordRequestDto } from './dtos/reset-password.request.dto'
@@ -92,7 +93,7 @@ export class UserController {
   @ApiGlobalResponse(UserResponseDto)
   @ApiParam({ name: 'id', example: 1, required: true })
   @Get(':id')
-  public getUserById(@Param() id: number): Promise<UserResponseDto> {
+  public getUserById(@Param() id: string): Promise<UserResponseDto> {
     return this.usersService.getUserById(id)
   }
 
@@ -138,5 +139,11 @@ export class UserController {
     @Body() resetPasswordDto: ResetPasswordRequestDto
   ): Promise<UserResponseDto> {
     return this.usersService.resetPassword(resetPasswordDto)
+  }
+
+  @ApiOperation({ description: 'Create fb user' })
+  @Post('fb-register')
+  public createFbUser(@Body(ValidationPipe) userDto: CreateFbUserRequestDto) {
+    return this.usersService.createFbUser(userDto)
   }
 }

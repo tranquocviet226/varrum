@@ -49,6 +49,10 @@ export const RolesPermissions = {
     {
       slug: EPermissions.ADMIN_ACCESS_DELETE_CATEGORY,
       description: 'Delete category'
+    },
+    {
+      slug: EPermissions.ADMIN_ACCESS_CREATE_POST,
+      description: 'Create post'
     }
   ],
   User: [

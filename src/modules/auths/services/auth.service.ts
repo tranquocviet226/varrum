@@ -22,6 +22,7 @@ import {
 } from '../dtos'
 import { TokenService } from './token.service'
 import { RefreshVerifyAccountResponseDto } from '../dtos/refresh-verify-account.response.dto'
+import { AuthFbDto } from '../dtos/auth-fb.dto'
 
 @Injectable()
 export class AuthService {
@@ -63,7 +64,7 @@ export class AuthService {
     }
 
     const payload: JwtPayload = { id: user.id, email: user.email }
-    const token = await this.tokenService.generateAuthToken(payload)
+    const token = this.tokenService.generateAuthToken(payload)
 
     const userDto = await UserMapper.toDto(user)
     const { permissions, roles } = await UserMapper.toDtoWithRelations(user)
@@ -122,6 +123,49 @@ export class AuthService {
         ErrorType.EMAIL_NOT_FOUND,
         ErrorMessage.EMAIL_NOT_FOUND
       )
+    }
+  }
+
+  public async loginFb({ id, fb_token }: AuthFbDto): Promise<LoginResponseDto> {
+    const user: UserEntity = await this.usersRepository.findOne({
+      fbId: id,
+      fbToken: fb_token
+    })
+
+    if (!user) {
+      throw new CommonException(
+        ErrorType.USER_NOT_FOUND,
+        ErrorMessage.USER_NOT_FOUND
+      )
+    }
+
+    if (user.fbExpirationTime <= Math.floor(Date.now() / 1000)) {
+      throw new CommonException(
+        ErrorType.ACCESS_TOKEN_EXPIRED,
+        ErrorMessage.ACCESS_TOKEN_EXPIRED
+      )
+    }
+    const payload: JwtPayload = { id: user.id, email: id }
+    const token = this.tokenService.generateAuthToken(payload)
+
+    const userDto = await UserMapper.toDto(user)
+    const { permissions, roles } = await UserMapper.toDtoWithRelations(user)
+    const additionalPermissions = permissions.map(({ slug }) => slug)
+    const mappedRoles = roles.map(({ name, permissions }) => {
+      const rolePermissions = permissions.map(({ slug }) => slug)
+      return {
+        name: name,
+        permissions: rolePermissions
+      }
+    })
+
+    return {
+      user: userDto,
+      token: token,
+      access: {
+        additionalPermissions: additionalPermissions,
+        roles: mappedRoles
+      }
     }
   }
 }

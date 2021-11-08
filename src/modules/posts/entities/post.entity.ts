@@ -32,7 +32,7 @@ export class PostEntity extends BaseEntity {
 
   @Column({
     name: 'description',
-    type: 'varchar',
+    type: 'longtext',
     nullable: true
   })
   description: string

@@ -15,6 +15,7 @@ import { JwtPayload } from '../auths/dtos'
 import { MailService } from '../mails/mail.service'
 import { RolesRepository } from '../roles/role.repository'
 import { UserResponseDto } from './dtos'
+import { CreateFbUserRequestDto } from './dtos/create-fb-user.request.dto'
 import { CreateUserRequestDto } from './dtos/create-user.request.dto'
 import { EmailRequestDto } from './dtos/refresh-verify.request.dto'
 import { ResetPasswordRequestDto } from './dtos/reset-password.request.dto'
@@ -107,7 +108,7 @@ export class UserService {
     }
   }
 
-  public async getUserById(id: number): Promise<UserResponseDto> {
+  public async getUserById(id: string): Promise<UserResponseDto> {
     const user = await this.usersRepository.findOne(id)
     if (!user) {
       throw new CommonException(
@@ -293,6 +294,30 @@ export class UserService {
         ErrorType.EMAIL_NOT_FOUND,
         ErrorMessage.EMAIL_NOT_FOUND
       )
+    }
+  }
+
+  async createFbUser(dto: CreateFbUserRequestDto) {
+    const userRole = await this.rolesRepository.findOne({ name: ERoles.USER })
+    let user = await this.usersRepository.findOne({ fbId: dto.fb_id })
+    if (user) {
+      // update user
+      user.fbToken = dto.fb_token
+      user.fbExpirationTime = dto.fb_expiration_time
+
+      user = await this.usersRepository.save(user)
+      return UserMapper.toDto(user)
+    } else {
+      try {
+        let newUser = UserMapper.toCreateFbEntity(dto, [userRole.id])
+        newUser = await this.usersRepository.save(newUser)
+        return UserMapper.toDto(newUser)
+      } catch (error) {
+        throw new CommonException(
+          ErrorType.INTERNAL_SERVER,
+          ErrorMessage.INTERNAL_SERVER
+        )
+      }
     }
   }
 }

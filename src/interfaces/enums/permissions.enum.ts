@@ -15,32 +15,10 @@ export enum EPermissions {
   ADMIN_ACCESS_PERMISSIONS_READ = 'admin.access.permissions.read',
   ADMIN_ACCESS_PERMISSIONS_CREATE = 'admin.access.permissions.create',
   ADMIN_ACCESS_PERMISSIONS_UPDATE = 'admin.access.permissions.update',
-  // Classes
-  ADMIN_ACCESS_CLASSES_LIST = 'admin.access.classes.list',
-  ADMIN_ACCESS_CLASSES_READ = 'admin.access.classes.read',
-  ADMIN_ACCESS_CLASSES_CREATE = 'admin.access.classes.create',
-  ADMIN_ACCESS_CLASSES_UPDATE = 'admin.access.classes.update',
-  ADMIN_ACCESS_CLASSES_DELETE = 'admin.access.classes.delete',
-  // Subject
-  ADMIN_ACCESS_SUBJECTS_LIST = 'admin.access.subject.list',
-  ADMIN_ACCESS_SUBJECTS_READ = 'admin.access.subject.read',
-  ADMIN_ACCESS_SUBJECTS_CREATE = 'admin.access.subject.create',
-  ADMIN_ACCESS_SUBJECTS_UPDATE = 'admin.access.subject.update',
-  ADMIN_ACCESS_SUBJECTS_DELETE = 'admin.access.subject.delete',
-  // Chapter
-  ADMIN_ACCESS_CHAPTERS_LIST = 'admin.access.chapter.list',
-  ADMIN_ACCESS_CHAPTERS_READ = 'admin.access.chapter.read',
-  ADMIN_ACCESS_CHAPTERS_CREATE = 'admin.access.chapter.create',
-  ADMIN_ACCESS_CHAPTERS_UPDATE = 'admin.access.chapter.update',
-  ADMIN_ACCESS_CHAPTERS_DELETE = 'admin.access.chapter.delete',
-  // Lesson
-  ADMIN_ACCESS_LESSONS_LIST = 'admin.access.lesson.list',
-  ADMIN_ACCESS_LESSONS_READ = 'admin.access.lesson.read',
-  ADMIN_ACCESS_LESSONS_CREATE = 'admin.access.lesson.create',
-  ADMIN_ACCESS_LESSONS_UPDATE = 'admin.access.lesson.update',
-  ADMIN_ACCESS_LESSONS_DELETE = 'admin.access.lesson.delete',
   // Category
   ADMIN_ACCESS_CREATE_CATEGORY = 'admin.access.create.category',
   ADMIN_ACCESS_UPDATE_CATEGORY = 'admin.access.update.category',
-  ADMIN_ACCESS_DELETE_CATEGORY = 'admin.access.delete.category'
+  ADMIN_ACCESS_DELETE_CATEGORY = 'admin.access.delete.category',
+  // Post
+  ADMIN_ACCESS_CREATE_POST = 'admin.access.create.post'
 }

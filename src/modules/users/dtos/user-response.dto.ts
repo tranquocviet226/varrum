@@ -14,6 +14,12 @@ export class UserResponseDto {
   email: string
 
   @ApiProperty()
+  fbId?: string
+
+  @ApiProperty()
+  fbAvatar?: string
+
+  @ApiProperty()
   avatar?: PhotoEntity
 
   @ApiProperty({ type: [RoleResponseDto] })

@@ -1,7 +1,13 @@
 import { PaginationParams } from '@common/decorators'
 import { PaginationResponseDto } from '@common/dtos'
 import { PaginationRequest } from '@common/interfaces'
-import { CurrentUser, JwtAuthGuard, TOKEN_NAME } from '@modules/auths'
+import {
+  CurrentUser,
+  JwtAuthGuard,
+  Permissions,
+  PermissionsGuard,
+  TOKEN_NAME
+} from '@modules/auths'
 import { UserEntity } from '@modules/users/entities/user.entity'
 import {
   Body,
@@ -16,6 +22,7 @@ import {
 } from '@nestjs/common'
 import { ApiBearerAuth, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger'
 import { QueryRequest } from 'src/helpers/query.request'
+import { EPermissions } from 'src/interfaces/enums/permissions.enum'
 import { CreatePostDto } from './dtos/create-post.dto'
 import { DeletePostDto } from './dtos/delete-post.dto'
 import { PostResponseDto } from './dtos/post-response.dto'
@@ -59,7 +66,6 @@ export class PostController {
     return this.postService.listPosts(pagination)
   }
 
-  // @UseGuards(JwtAuthGuard)
   @ApiParam({
     name: 'id',
     example: 'e92694a3-90a9-44f5-94a2-9cfe07e3c141',
@@ -70,7 +76,8 @@ export class PostController {
     return this.postService.showPost(postDto)
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, PermissionsGuard)
+  @Permissions(EPermissions.ADMIN_ACCESS_CREATE_POST)
   @Post()
   public createPost(
     @CurrentUser() currentUser: UserEntity,
@@ -85,7 +92,7 @@ export class PostController {
     return this.postService.updatePost(postDto)
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete()
   public deletePost(@Body(ValidationPipe) postDto: DeletePostDto) {
     return this.postService.deletePost(postDto)

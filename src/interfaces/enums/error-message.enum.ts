@@ -12,6 +12,7 @@ export enum ErrorMessage {
   ACTIVATED_EMAIL = 'Email has been activated',
   BLOCKED_EMAIL = 'Email has been blocked',
   // User
+  USER_EXISTS = 'User already exists',
   USER_NOT_FOUND = 'User not found!',
   EMAIL_NOT_FOUND = 'Email not found!',
   EMAIL_NOT_EMPTY = 'Email should not be empty!',

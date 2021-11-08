@@ -20,6 +20,7 @@ export class PostRepository extends Repository<PostEntity> {
 
     query.leftJoinAndSelect('posts.photo', 'photo')
     query.leftJoinAndSelect('posts.categories', 'categories')
+    query.leftJoinAndSelect('posts.author', 'author')
 
     if (condition) {
       query.where(condition)
@@ -37,6 +38,8 @@ export class PostRepository extends Repository<PostEntity> {
       query.where(
         `
         posts.title LIKE :search
+        OR
+        categories.name LIKE :search
             `,
         { search: `%${search}%` }
       )

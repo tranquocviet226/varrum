@@ -60,7 +60,7 @@ export class CategoryService {
   }
 
   async update(updateDto: UpdateCategoryDto) {
-    const category = await this.categoryRepository.findOne({ id: updateDto.id })
+    let category = await this.categoryRepository.findOne({ id: updateDto.id })
     if (!category)
       throw new CommonException(
         ErrorType.ID_NOT_FOUND,
@@ -75,8 +75,8 @@ export class CategoryService {
         ErrorMessage.IMAGE_NOT_FOUND
       )
     try {
-      await this.categoryRepository.update(updateDto.id, updateDto)
-      const result = await this.categoryRepository.findOne({ id: updateDto.id })
+      category = CategoryMapper.toUpdateEntity(category, updateDto)
+      const result = await this.categoryRepository.save(category)
       return CategoryMapper.toDto(result)
     } catch (_error) {
       throw new CommonException(

@@ -49,7 +49,7 @@ export class ForumsCategoryEntity extends BaseEntity {
     lazy: true,
     cascade: true
   })
-  @JoinColumn({ name: 'image_id' })
+  @JoinColumn({ name: 'photo_id' })
   photo: Promise<PhotoEntity>
 
   @OneToMany(() => ForumEntity, (forum) => forum.category)
